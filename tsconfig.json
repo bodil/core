@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "sourceMap": true,
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "Bundler",
+        "lib": [
+            "ESNext",
+            "ESNext.Disposable",
+            "DOM"
+        ],
+        "composite": true,
+        "strict": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "useDefineForClassFields": false,
+        "strictNullChecks": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "strictBuiltinIteratorReturn": true,
+        "noUncheckedSideEffectImports": true
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./package.json",
+        "./eslint.config.mjs"
+    ],
+    "exclude": [
+        "node_modules/**",
+    ]
+}
