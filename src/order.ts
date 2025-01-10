@@ -6,30 +6,37 @@ export enum Cmp {
     GT = 1,
 }
 
+/**
+ * An order function is a function which is used to compare two items, returning
+ * a {@link Cmp} to describe the first item in relation to the second, eg.
+ * {@link Cmp.GT} says the first item is greater than the second item.
+ */
 export type OrderFn<A> = (left: A, right: A) => Cmp;
 
-export function cmpNum(num: number): Cmp {
-    return num < 0 ? Cmp.LT : num > 0 ? Cmp.GT : Cmp.EQ;
-}
-
-export const numericAscending: OrderFn<number> = (left: number, right: number): Cmp => {
-    return cmpNum(left - right);
-};
-
-export const numericDescending: OrderFn<number> = (left: number, right: number): Cmp => {
-    return cmpNum(right - left);
-};
-
+/**
+ * The set of types which can be compared using the `&lt;` and `&gt;` operators.
+ */
 export type OperatorComparable = number | string | bigint | Date;
 
+/**
+ * An order function which sorts {@link OperatorComparable} items in ascending
+ * order.
+ */
 export function ascending<A extends OperatorComparable>(left: A, right: A): Cmp {
     return left < right ? Cmp.LT : left === right ? Cmp.EQ : Cmp.GT;
 }
 
+/**
+ * An order function which sorts {@link OperatorComparable} items in descending
+ * order.
+ */
 export function descending<A extends OperatorComparable>(left: A, right: A): Cmp {
     return left < right ? Cmp.GT : left === right ? Cmp.EQ : Cmp.LT;
 }
 
+/**
+ * Take an order function and invert its order.
+ */
 export function reverse<T>(fn: OrderFn<T>): OrderFn<T> {
     return (left: T, right: T) => {
         switch (fn(left, right)) {

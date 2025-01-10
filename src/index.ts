@@ -1,13 +1,28 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 // deno-lint-ignore-file no-this-alias
 
-import { None, Some, Option } from "@bodil/opt";
 import { type OrderFn, bisectHigh, bisectLow } from "./order";
 import type { Present } from "./types";
 import { assert } from "./assert";
 
+import * as Assert from "./assert";
+import * as Async from "./async";
+import * as Date from "./date";
+import * as Event from "./event";
+import * as Fun from "./fun";
+import * as Order from "./order";
+import * as Types from "./types";
+export { Assert, Async, Date, Event, Fun, Order, Types };
+
+import { None, Some, Option, Ok, Err, Result } from "@bodil/opt";
+export { None, Some, Option, Ok, Err, Result };
+
 declare global {
-    interface Object {
+    interface ObjectConstructor {
+        /**
+         * Create a new object by mapping an existing object's `Object.entries`
+         * through a function.
+         */
         mapEntries<A, B>(
             obj: Record<string, A>,
             fn: (entry: [key: string, value: A]) => [string, B]
@@ -124,6 +139,14 @@ declare global {
          * front to decide its length, so this function is not lazy.
          */
         frontBiasedPartition(size: number): Array<Array<T>>;
+        /**
+         * Filter out any items which are `undefined`.
+         */
+        present(): IteratorObject<Present<T>, undefined>;
+        /**
+         * Filter out any items which are `null` or `undefined`.
+         */
+        nonNullable(): IteratorObject<NonNullable<T>, undefined>;
     }
 }
 
@@ -329,4 +352,18 @@ Iterator.prototype.frontBiasedPartition = function frontBiasedPartition<T>(
     }
     assert(inputPos === input.length);
     return output;
+};
+
+Iterator.prototype.present = function present<T>(
+    this: IteratorObject<T, undefined>
+): IteratorObject<Present<T>, undefined> {
+    return Iterator.from(this.filter((item): item is Present<T> => item !== undefined));
+};
+
+Iterator.prototype.nonNullable = function nonNullable<T>(
+    this: IteratorObject<T, undefined>
+): IteratorObject<NonNullable<T>, undefined> {
+    return Iterator.from(
+        this.filter((item): item is NonNullable<T> => item !== undefined && item !== null)
+    );
 };

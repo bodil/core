@@ -3,7 +3,7 @@ import * as Order from "./order";
 
 import "@bodil/opt-vitest";
 
-const cmp = Order.numericAscending;
+const cmp = Order.ascending;
 const bisectLowNum = (array: Array<number>, key: number) => Order.bisectLow(cmp, array, key);
 const bisectHighNum = (array: Array<number>, key: number) => Order.bisectHigh(cmp, array, key);
 

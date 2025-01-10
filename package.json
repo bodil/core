@@ -1,6 +1,6 @@
 {
     "name": "@bodil/core",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "My TypeScript standard library",
     "repository": {
         "type": "git",
@@ -17,6 +17,48 @@
             "import": {
                 "types": "./dist/index.d.ts",
                 "import": "./dist/index.js"
+            }
+        },
+        "./assert": {
+            "import": {
+                "types": "./dist/assert.d.ts",
+                "import": "./dist/assert.js"
+            }
+        },
+        "./async": {
+            "import": {
+                "types": "./dist/async.d.ts",
+                "import": "./dist/async.js"
+            }
+        },
+        "./date": {
+            "import": {
+                "types": "./dist/date.d.ts",
+                "import": "./dist/date.js"
+            }
+        },
+        "./event": {
+            "import": {
+                "types": "./dist/event.d.ts",
+                "import": "./dist/event.js"
+            }
+        },
+        "./fun": {
+            "import": {
+                "types": "./dist/fun.d.ts",
+                "import": "./dist/fun.js"
+            }
+        },
+        "./order": {
+            "import": {
+                "types": "./dist/order.d.ts",
+                "import": "./dist/order.js"
+            }
+        },
+        "./types": {
+            "import": {
+                "types": "./dist/types.d.ts",
+                "import": "./dist/types.js"
             }
         }
     },

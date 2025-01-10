@@ -1,11 +1,20 @@
 import { test, expect, expectTypeOf } from "vitest";
 
 import "./index";
-import { numericAscending } from "./order";
+import { ascending } from "./order";
 
 import "@bodil/opt-vitest";
 
 const Iterator = globalThis.Iterator;
+
+test("Object.mapEntries", () => {
+    const obj1 = { foo: 1, bar: 2, baz: 3 };
+    expect(Object.mapEntries(obj1, ([key, value]) => [key.toUpperCase(), `${value + 1}`])).toEqual({
+        FOO: "2",
+        BAR: "3",
+        BAZ: "4",
+    });
+});
 
 test("Map.getOrSet", () => {
     const defaultValue = () => "Robert";
@@ -28,10 +37,10 @@ test("Array.insert", () => {
 
 test("Array.insertOrdered", () => {
     const array = [1, 3, 5, 7, 9];
-    const result = array.insertOrdered(6, numericAscending);
+    const result = array.insertOrdered(6, ascending);
     expect(result).toEqual([1, 3, 5, 6, 7, 9]);
     expect(array).toEqual([1, 3, 5, 6, 7, 9]);
-    const result2 = array.insertOrdered(1337, numericAscending);
+    const result2 = array.insertOrdered(1337, ascending);
     expect(result2).toEqual([1, 3, 5, 6, 7, 9, 1337]);
     expect(array).toEqual([1, 3, 5, 6, 7, 9, 1337]);
 });
