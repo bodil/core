@@ -20,6 +20,13 @@ export { None, Some, Option, Ok, Err, Result };
 declare global {
     interface ObjectConstructor {
         /**
+         * Checked key lookup. Returns {@link None} if a key isn't present.
+         * Returns a {@link Some} if the key is present, even if the value is
+         * `undefined`.
+         */
+        get<O extends object, K extends keyof O>(obj: O, key: K): Option<O[K]>;
+
+        /**
          * Create a new object by mapping an existing object's `Object.entries`
          * through a function.
          */
@@ -91,6 +98,13 @@ declare global {
          * Return a copy of the array with any `null` or `undefined` values removed.
          */
         nonNullable(): Array<NonNullable<T>>;
+
+        /**
+         * Checked index operator. Returns {@link None} if an index isn't
+         * present, even for sparse arrays. Returns a {@link Some} if the index
+         * is present, even if the value is `undefined`.
+         */
+        get(index: number): Option<T>;
     }
 
     interface IteratorConstructor {
@@ -151,6 +165,10 @@ declare global {
 }
 
 // Object
+
+Object.get = function get<O extends object, K extends keyof O>(obj: O, key: K): Option<O[K]> {
+    return Object.hasOwn(obj, key) ? Some(obj[key]) : None;
+};
 
 Object.mapEntries = function mapEntries<A, B>(
     obj: Record<string, A>,
@@ -225,6 +243,10 @@ Array.prototype.present = function present<T>(this: Array<T>): Array<Present<T>>
 
 Array.prototype.nonNullable = function nonNullable<T>(this: Array<T>): Array<NonNullable<T>> {
     return this.filter((value: T): value is NonNullable<T> => value !== undefined);
+};
+
+Array.prototype.get = function get<T>(this: Array<T>, index: number): Option<T> {
+    return Object.get(this, index);
 };
 
 // Iterator

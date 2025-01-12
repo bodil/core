@@ -1,4 +1,5 @@
 import { test, expect, expectTypeOf } from "vitest";
+import type { Option } from ".";
 
 import "./index";
 import { ascending } from "./order";
@@ -6,6 +7,32 @@ import { ascending } from "./order";
 import "@bodil/opt-vitest";
 
 const Iterator = globalThis.Iterator;
+
+test("Object.get", () => {
+    const obj = { foo: "foo", bar: 31337 };
+    expect(Object.get(obj, "foo")).isSome("foo");
+    expectTypeOf(Object.get(obj, "foo")).toEqualTypeOf<Option<string>>();
+    expect(Object.get(obj, "bar")).isSome(31337);
+    expectTypeOf(Object.get(obj, "bar")).toEqualTypeOf<Option<number>>();
+    // @ts-expect-error
+    expect(Object.get(obj, "baz")).isNone();
+});
+
+test("Array.get", () => {
+    const array = [4, 5, 6];
+    expect(array.get(-1)).isNone();
+    expect(array.get(0)).isSome(4);
+    expect(array.get(1)).isSome(5);
+    expect(array.get(2)).isSome(6);
+    expect(array.get(3)).isNone();
+
+    const sparseArray: Array<number> = [];
+    sparseArray[1] = 31337;
+    expect(sparseArray.get(0)).isNone();
+    expect(sparseArray.get(1)).isSome(31337);
+    expect(sparseArray.get(2)).isNone();
+    expectTypeOf(sparseArray.get(0)).toEqualTypeOf<Option<number>>();
+});
 
 test("Object.mapEntries", () => {
     const obj1 = { foo: 1, bar: 2, baz: 3 };
