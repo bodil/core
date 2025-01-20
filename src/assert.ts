@@ -10,7 +10,6 @@ export function assert(
     assertion: unknown,
     message: string = "runtime assertion failed"
 ): asserts assertion {
-    // deno-lint-ignore no-explicit-any
     if (
         (import.meta as unknown as { env: unknown }).env === undefined ||
         (import.meta as unknown as { env: { DEV: boolean } }).env.DEV
@@ -35,7 +34,7 @@ export function assertAlways(assertion: unknown, message?: string): asserts asse
  */
 export function unreachable(): never {
     throw new Error(
-        "Congratulations! You have reached a part of the code thought to be unreachable."
+        "Congratulations! You have reached a part of the code previously thought to be unreachable."
     );
 }
 
@@ -68,7 +67,7 @@ export function assertNever<T extends never>(_value: T): T {
  * Throws an exception otherwise.
  */
 export function present<A>(value: A): NonNullable<A> {
-    assert(value !== null && value !== undefined);
+    assertAlways(value !== null && value !== undefined);
     return value;
 }
 

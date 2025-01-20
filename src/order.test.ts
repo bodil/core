@@ -3,9 +3,10 @@ import * as Order from "./order";
 
 import "@bodil/opt-vitest";
 
-const cmp = Order.ascending;
-const bisectLowNum = (array: Array<number>, key: number) => Order.bisectLow(cmp, array, key);
-const bisectHighNum = (array: Array<number>, key: number) => Order.bisectHigh(cmp, array, key);
+const bisectLowNum = (array: Array<number>, key: number) =>
+    Order.bisectLow(Order.ascending, array, key);
+const bisectHighNum = (array: Array<number>, key: number) =>
+    Order.bisectHigh(Order.ascending, array, key);
 
 test("bisectLow", () => {
     const list = [2, 4, 6, 8, 10];
@@ -61,7 +62,7 @@ test("find", () => {
     const e1 = { foo: 1 };
     const e2 = { foo: 1 };
     const e3 = { foo: 2 };
-    const eCmp = (a: FindTestData, b: FindTestData) => cmp(a.foo, b.foo);
+    const eCmp = (a: FindTestData, b: FindTestData) => Order.ascending(a.foo, b.foo);
     const findE = (array: Array<FindTestData>, key: FindTestData) => Order.find(eCmp, array, key);
 
     const list: Array<FindTestData> = [e0, e1, e2, e3];
