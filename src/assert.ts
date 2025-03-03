@@ -75,7 +75,8 @@ export function present<A>(value: A): NonNullable<A> {
  * Tests whether a value is null, undefined, false, an empty array or an empty
  * string.
  */
-export function isEmpty(value: unknown): value is null | undefined | "" | [] | false {
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+export function isEmpty(value: unknown): value is null | undefined | void | "" | [] | false {
     return (
         value === null ||
         value === undefined ||
@@ -88,7 +89,8 @@ export function isEmpty(value: unknown): value is null | undefined | "" | [] | f
 /**
  * Tests whether a value is null or undefined.
  */
-export function isNullish(value: unknown): value is null | undefined {
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+export function isNullish(value: unknown): value is null | undefined | void {
     return value === null || value === undefined;
 }
 
