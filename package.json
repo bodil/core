@@ -1,6 +1,6 @@
 {
     "name": "@bodil/core",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "My TypeScript standard library",
     "repository": {
         "type": "git",
