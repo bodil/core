@@ -143,3 +143,43 @@ export function secondsBetween(a: Date, b: Date): number {
 export function millisBetween(a: Date, b: Date): Milliseconds {
     return +a - +b;
 }
+
+/**
+ * Test if a {@link Date} is more than the given number of milliseconds before
+ * the present.
+ */
+export function isOlderThan(date: Date, millis: Milliseconds): boolean {
+    return date <= subMillis(new Date(), millis);
+}
+
+/**
+ * Test if a {@link Date} is more than the given number of seconds before the
+ * present.
+ */
+export function isOlderThanSeconds(date: Date, seconds: number): boolean {
+    return date <= subMillis(new Date(), seconds * MILLIS_IN_SECOND);
+}
+
+/**
+ * Test if a {@link Date} is more than the given number of minutes before the
+ * present.
+ */
+export function isOlderThanMinutes(date: Date, minutes: number): boolean {
+    return date <= subMillis(new Date(), minutes * MILLIS_IN_MINUTE);
+}
+
+/**
+ * Test if a {@link Date} is more than the given number of hours before the
+ * present.
+ */
+export function isOlderThanHours(date: Date, hours: number): boolean {
+    return date <= subMillis(new Date(), hours * MILLIS_IN_HOUR);
+}
+
+/**
+ * Test if a {@link Date} is more than the given number of days before the
+ * present.
+ */
+export function isOlderThanDays(date: Date, days: number): boolean {
+    return date <= subMillis(new Date(), days * MILLIS_IN_DAY);
+}
