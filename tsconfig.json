@@ -11,6 +11,9 @@
             "ESNext.Disposable",
             "DOM"
         ],
+        "types": [
+            "temporal-polyfill/global"
+        ],
         "composite": true,
         "strict": true,
         "noUnusedLocals": false,

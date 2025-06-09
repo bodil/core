@@ -32,12 +32,6 @@
                 "import": "./dist/async.js"
             }
         },
-        "./date": {
-            "import": {
-                "types": "./dist/date.d.ts",
-                "import": "./dist/date.js"
-            }
-        },
         "./event": {
             "import": {
                 "types": "./dist/event.d.ts",
@@ -54,6 +48,12 @@
             "import": {
                 "types": "./dist/order.d.ts",
                 "import": "./dist/order.js"
+            }
+        },
+        "./time": {
+            "import": {
+                "types": "./dist/time.d.ts",
+                "import": "./dist/time.js"
             }
         },
         "./types": {
@@ -73,7 +73,8 @@
         "prepublish": "tsc"
     },
     "dependencies": {
-        "@bodil/opt": "^0.2.6"
+        "@bodil/opt": "^0.2.6",
+        "temporal-polyfill": "^0.3.0"
     },
     "devDependencies": {
         "@bodil/opt-vitest": "^1.0.0",
@@ -86,6 +87,6 @@
         "eslint-plugin-jsdoc": "^50.7.1",
         "globals": "^15.15.0",
         "typescript": "^5.8.3",
-        "vitest": "^3.2.2"
+        "vitest": "^3.2.3"
     }
 }

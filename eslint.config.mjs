@@ -232,6 +232,7 @@ export default [
             "jsdoc/match-description": "off",
             "jsdoc/lines-before-block": "off",
             "jsdoc/tag-lines": "off",
+            "jsdoc/no-undefined-types": "off",
         },
     },
 ];

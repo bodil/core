@@ -66,8 +66,8 @@ export function assertNever<T extends never>(_value: T): T {
  * Returns the given value unchanged if it's neither null nor undefined.
  * Throws an exception otherwise.
  */
-export function present<A>(value: A): NonNullable<A> {
-    assertAlways(value !== null && value !== undefined);
+export function present<A>(value: A, message?: string): NonNullable<A> {
+    assertAlways(value !== null && value !== undefined, message);
     return value;
 }
 

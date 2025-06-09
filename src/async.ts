@@ -1,10 +1,13 @@
 /**
  * Return a promise that will resolve after the specified number of
- * milliseconds.
+ * milliseconds or {@link Temporal.Duration}.
  */
-export function sleep(ms: number): Promise<void> {
+export function sleep(duration: number | Temporal.Duration): Promise<void> {
     return new Promise((resolve) => {
-        setTimeout(resolve, ms);
+        setTimeout(
+            resolve,
+            typeof duration === "number" ? duration : duration.total("milliseconds")
+        );
     });
 }
 
